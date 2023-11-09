@@ -42,14 +42,14 @@ public class Waves : MonoBehaviour
         mobSpawnTick = mobSpawnIntervals;
         mobsSpawned = 0;
 
-        print("Started new wave " + wave);
+        //print("Started new wave " + wave);
         SpawnStartMobs();
     }
 
     // Calls to spawn the amount of start mobs
     void SpawnStartMobs()
     {
-        print("Called to spawn start mobs");
+        //print("Called to spawn start mobs");
         SpawnMobs(startMobsToSpawn);
     }
 
@@ -78,7 +78,7 @@ public class Waves : MonoBehaviour
         waveDurationTick -= Time.deltaTime;
         if (waveDurationTick <= 0)
         {
-            print("Wave " + wave + " Complete.");
+            //print("Wave " + wave + " Complete.");
             StartNewWave();
         }
     }
@@ -93,7 +93,7 @@ public class Waves : MonoBehaviour
             Instantiate(basicEnemy, newSpawnLocation , Quaternion.identity, enemiesTransform);
         }
 
-        print("Spawned a total of " + amount + " mobs (" + (mobsSpawned + 1) + "/" + setMobsToSpawn + ")");
+        //print("Spawned a total of " + amount + " mobs (" + (mobsSpawned + 1) + "/" + setMobsToSpawn + ")");
         mobsSpawned = Mathf.Clamp(mobsSpawned + amount, 0, setMobsToSpawn);
     }
 
