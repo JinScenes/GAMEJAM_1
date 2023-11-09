@@ -13,9 +13,11 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
 
     [Header("Attack Rate & Range Stats")]
-    [Range(0, 5)][SerializeField] private float attackRange;
+    [Range(0, 2)][SerializeField] private float attackRange;
     [Range(0, 5)][SerializeField] private float attackSpeed;
 
+    [SerializeField] float attackPointDistance;
+    
     [Header("Attack Damage")]
     [Range(0, 10)] public int minAttackDMG;
     [Range(10, 20)] public int maxAttackDMG;
@@ -24,9 +26,6 @@ public class PlayerCombat : MonoBehaviour
 
     private float originalSpeed;
     private float nextAttackTime = 0f;
-
-    Vector3 attackPointoffset;
-    public float attackPointDistance;
 
     private void Start()
     {
@@ -59,15 +58,15 @@ public class PlayerCombat : MonoBehaviour
 
     private void UpdateAttackPointPosition()
     {
-        attackPointoffset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
-        attackPoint.position = transform.position + attackPointoffset;
+        float attackPointDistance = 1.5f;
+        Vector3 offset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
+        attackPoint.position = transform.position + offset;
     }
 
     private void AttackFunction()
     {
         anim.SetTrigger("Attacking");
 
-        //ENEMIES
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyMask);
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -83,14 +82,23 @@ public class PlayerCombat : MonoBehaviour
         playerController.speed = originalSpeed;
     }
 
+    private void OnDrawGizmos()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.color = Color.blue;
+        Vector3 gizmoPosition = transform.position + new Vector3(lastDir.x, lastDir.y, 0) * attackRange;
+        Gizmos.DrawWireSphere(gizmoPosition, attackRange);
+    }
+
+
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
             return;
 
-
-        attackPointoffset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position + attackPointoffset, attackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
