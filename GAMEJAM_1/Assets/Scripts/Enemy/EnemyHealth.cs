@@ -11,6 +11,8 @@ public class EnemyHealth : MonoBehaviour
     [Range(0, 100)][SerializeField] private int maxHealth;
     [Range(0, 50)][SerializeField] private int currentHealth;
 
+    [SerializeField] private GameObject droppedItem;
+
     [HideInInspector]
     public bool isDead = false;
 
@@ -43,8 +45,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void DeathFunction(float time)
     {
-        
+        Instantiate(droppedItem, transform.position, Quaternion.identity);
         anim.SetBool("IsDead", true);
         Destroy(gameObject, time);
+        this.enabled = false;
     }
 }

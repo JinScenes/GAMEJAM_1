@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1354179793318270998}
   - component: {fileID: 412141704329023724}
   - component: {fileID: 1249832914276807161}
+  - component: {fileID: 6049290631631102014}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb605e8f9bd10144b844cd9f9a971916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathUI: {fileID: 0}
   maxHealth: 300
   currentHealth: 300
 --- !u!114 &1249832914276807161
@@ -246,6 +248,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fc3966f7de1674db1fa8c824821e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6049290631631102014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240132666617133112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c83d2cfea0ce849823533b51b51664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oxygenAmount: 0
 --- !u!1 &7960055298860851436
 GameObject:
   m_ObjectHideFlags: 0
