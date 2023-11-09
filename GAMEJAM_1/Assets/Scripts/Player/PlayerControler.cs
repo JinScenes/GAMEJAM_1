@@ -7,9 +7,10 @@ public class PlayerControler : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
-    private Vector2 movement;
+    [HideInInspector]
+    public Vector2 movement;
 
-    [Range(0, 10)] public float speed;
+    [Range(0, 20)] public float speed;
 
     private float timeBetweenStep;
     private float sinceLastStep;
