@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
 
     [Header("Attack Rate & Range Stats")]
-    [Range(0, 2)][SerializeField] private float attackRange;
+    [Range(0, 5)][SerializeField] private float attackRange;
     [Range(0, 5)][SerializeField] private float attackSpeed;
 
     [Header("Attack Damage")]
@@ -24,6 +24,9 @@ public class PlayerCombat : MonoBehaviour
 
     private float originalSpeed;
     private float nextAttackTime = 0f;
+
+    Vector3 attackPointoffset;
+    public float attackPointDistance;
 
     private void Start()
     {
@@ -56,9 +59,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void UpdateAttackPointPosition()
     {
-        float attackPointDistance = 1.5f;
-        Vector3 offset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
-        attackPoint.position = transform.position + offset;
+        attackPointoffset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
+        attackPoint.position = transform.position + attackPointoffset;
     }
 
     private void AttackFunction()
@@ -86,7 +88,9 @@ public class PlayerCombat : MonoBehaviour
         if (attackPoint == null)
             return;
 
+
+        attackPointoffset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position + attackPointoffset, attackRange);
     }
 }
