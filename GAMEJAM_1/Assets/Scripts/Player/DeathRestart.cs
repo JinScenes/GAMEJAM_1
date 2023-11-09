@@ -14,7 +14,9 @@ public class DeathRestart : MonoBehaviour
 
     public void RestartScene()
     {
+        Time.timeScale = 1;
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+
     }
 
 
