@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MaxATK : MonoBehaviour
 {
-    [SerializeField] private int maxAtkIncrease = 10;
+    [SerializeField] private int damageBuff;
 
     public void Use(GameObject player)
     {
-        //player.GetComponent<PlayerAttack>().IncreaseMaxAttack(maxAtkIncrease);
+        player.GetComponent<PlayerCombat>().minAttackDMG += damageBuff;
     }
 }

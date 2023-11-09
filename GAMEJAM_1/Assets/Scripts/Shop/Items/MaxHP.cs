@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MaxHP : MonoBehaviour
 {
-    [SerializeField] private int maxHealthIncrease = 10;
+    [SerializeField] private int maxHealthIncrease;
 
     public void Use(GameObject player)
     {
-        //player.GetComponent<PlayerHealth>().IncreaseMaxHP(maxHealthIncrease);
+        player.GetComponent<PlayerHealth>().currentHealth += maxHealthIncrease;
     }
 }

@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Player Health")]
     [Range(0, 500)] public int maxHealth;
-    [HideInInspector] public int currentHealth;
+    [Range(0, 500)] public int currentHealth;
 
     public void TakeDamage(int damage)
     {
@@ -23,5 +23,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+
     }
 }

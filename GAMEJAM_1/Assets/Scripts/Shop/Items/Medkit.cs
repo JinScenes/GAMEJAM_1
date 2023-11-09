@@ -8,6 +8,6 @@ public class Medkit : MonoBehaviour
 
     public void Use(GameObject player)
     {
-        //player.GetComponent<PlayerHealth>().currentHealth += healthBoost;
+        player.GetComponent<PlayerHealth>().currentHealth += healthBoost;
     }
 }

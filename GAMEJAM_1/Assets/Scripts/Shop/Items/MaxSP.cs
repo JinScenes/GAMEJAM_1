@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MaxSP : MonoBehaviour
 {
-    [SerializeField] private int maxSpeedIncrease = 10;
+    [SerializeField] private int SpeedIncreaseValue;
 
     public void Use(GameObject player)
     {
-        //player.GetComponent<PlayerMovement>().IncreaseMaxSpeed(maxSpeedIncrease);
+        player.GetComponent<PlayerControler>().speed += 5;
     }
 }

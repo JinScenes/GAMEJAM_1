@@ -36,12 +36,12 @@ public class WindField : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            //Rigidbody2D enemyRigidbody = other.GetComponent<Rigidbody2D>();
-            //if (enemyRigidbody != null)
-            //{
-            //    Vector2 pushDirection = (other.transform.position - transform.position).normalized;
-            //    enemyRigidbody.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
-            //}
+            Rigidbody2D enemyRigidbody = other.GetComponent<Rigidbody2D>();
+            if (enemyRigidbody != null)
+            {
+                Vector2 pushDirection = (other.transform.position - transform.position).normalized;
+                enemyRigidbody.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
+            }
         }
     }
 }

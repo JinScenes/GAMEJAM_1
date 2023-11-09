@@ -37,7 +37,7 @@ public class HydroArea : MonoBehaviour
     {
         if (isActive && other.CompareTag("Enemy"))
         {
-            //other.GetComponent<Enemy>().TakeDamage(damage * Time.deltaTime);
+            other.GetComponent<EnemyHealth>().TakeDamage(damage);
         }
     }
 }

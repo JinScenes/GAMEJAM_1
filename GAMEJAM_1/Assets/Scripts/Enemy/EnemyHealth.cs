@@ -23,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        anim.SetTrigger("IsHurt");
+        anim.SetTrigger("Hurt");
         StartCoroutine(FlashColor(0.2f));
 
         if (currentHealth <= 0)

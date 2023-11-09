@@ -34,7 +34,7 @@ public class SolarBurst : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            //other.GetComponent<Enemy> ().damageAmount = damageAmount;
+            other.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
         }
     }
 }
