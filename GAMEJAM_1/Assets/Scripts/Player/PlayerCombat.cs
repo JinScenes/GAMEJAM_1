@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -8,52 +7,61 @@ public class PlayerCombat : MonoBehaviour
     private Animator anim;
 
     [Header("Attack Position Transform GameObject")]
-    [SerializeField] Transform attackPoint;
+    [SerializeField] private Transform attackPoint;
 
     [Header("Enemy Mask")]
-    [SerializeField] LayerMask enemyMask;
-    [Header("Object Mask")]
-    [SerializeField] LayerMask objectMask;
+    [SerializeField] private LayerMask enemyMask;
 
     [Header("Attack Rate & Range Stats")]
-    [Range(0, 2)][SerializeField] float attackRange = 0.5f;
-    [Range(0, 5)][SerializeField] float attackRate = 2.3f;
+    [Range(0, 2)][SerializeField] private float attackRange;
+    [Range(0, 5)][SerializeField] private float attackSpeed;
 
     [Header("Attack Damage")]
     [Range(0, 10)] public int minAttackDMG;
     [Range(10, 20)] public int maxAttackDMG;
 
-    private float newSpeed = 4f;
+    private Vector2 lastDir;
+
+    private float originalSpeed;
     private float nextAttackTime = 0f;
 
-    void Start()
+    private void Start()
     {
-        //COMPONENTS
         anim = GetComponent<Animator>();
         playerController = GetComponent<PlayerControler>();
+        originalSpeed = playerController.speed;
+        lastDir = Vector2.down;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Time.time >= nextAttackTime)
         {
             if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButton(0))
             {
-                playerController.speed = 2f;
-
-                //Audio
-                //FindObjectOfType<AudioManager>().AudioTrigger(AudioManager.Sound.playerAttack, transform.position, 1f);
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
-                StartCoroutine(SpeedChange(0.4f));
+                playerController.speed /= 4f;
+                AttackFunction();
+                nextAttackTime = Time.time + 1f / attackSpeed;
+                StartCoroutine(ResetSpeedAfterDelay(0.1f));
             }
         }
+
+        if (playerController.movement != Vector2.zero)
+        {
+            lastDir = playerController.movement.normalized;
+        }
+
+        UpdateAttackPointPosition();
     }
 
-    #region Attacking
+    private void UpdateAttackPointPosition()
+    {
+        float attackPointDistance = 1.5f;
+        Vector3 offset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
+        attackPoint.position = transform.position + offset;
+    }
 
-    void Attack()
+    private void AttackFunction()
     {
         anim.SetTrigger("Attacking");
 
@@ -61,19 +69,15 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyMask);
         foreach (Collider2D enemy in hitEnemies)
         {
-            //ATTACKS ENEMY FROM A RANGE OF DAMAGE
-            //enemy.GetComponent<Enemy>().TakeDamage(Random.Range(minAttackDMG, maxAttackDMG));
+            enemy.GetComponent<EnemyHealth>().TakeDamage(Random.Range(minAttackDMG, maxAttackDMG));
         }
     }
 
-    #endregion
-
-    private IEnumerator SpeedChange(float time)
+    private IEnumerator ResetSpeedAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(delay);
 
-        //CREATES DELAY IN SPEED SO PLAYER ISN'T ABLE TO ATTACK AND RUN AWAY EASILY
-        playerController.speed = newSpeed;
+        playerController.speed = originalSpeed;
     }
 
     private void OnDrawGizmosSelected()
