@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private Transform player;
+    public Transform player;
     [SerializeField] private float speed;
     [SerializeField] private float stoppingDistance;
 
@@ -11,6 +11,11 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sp;
+
+    private void Awake()
+    {
+        player = GameObject.Find("Player").transform;
+    }
 
     private void Start()
     {

@@ -213,9 +213,9 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 128
-  attackRange: 0.75
-  attackRate: 2.3
-  minAttackDMG: 0
+  attackRange: 1.65
+  attackSpeed: 2.3
+  minAttackDMG: 10
   maxAttackDMG: 0
 --- !u!1 &7960055298860851436
 GameObject:

@@ -70,6 +70,7 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHealth>().TakeDamage(Random.Range(minAttackDMG, maxAttackDMG));
+            Debug.Log((Random.Range(minAttackDMG, maxAttackDMG)));
         }
     }
 
