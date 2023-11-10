@@ -22,12 +22,16 @@ public class Ability
     public TextMeshProUGUI uiName;
     public TextMeshProUGUI uiCooldown;
 
+    GameObject abilities;
+    
+
     public Ability(string name, float cooldown, int level, int index)
     {
         this.name = name;
         this.cooldown = cooldown;
         this.index = index;
         this.level = level;
+        abilities = GameObject.Find("Abilities");
 
         SetUpUI();
     }
@@ -37,6 +41,7 @@ public class Ability
         this.name = name;
         this.cooldown = cooldown;
         this.index = index;
+        abilities = GameObject.Find("Abilities");
 
         SetUpUI();
     }
@@ -59,8 +64,10 @@ public class Ability
 
         switch (name)
         {
-            case "Fireball":
+            case "IceShot":
                 Debug.Log("FIREEEEEEEEBALLLU");
+                abilities.GetComponent<IceShot>().enabled = true;
+                //abilities.GetComponent<TextMeshProUGUI>().enabled = false;
                 break;
             //plr.GetComponent<name>()
             default:
@@ -107,7 +114,7 @@ public class Backpack : MonoBehaviour
     {
 
         backPackUI = GameObject.Find("Backpack");
-        Ability fireBall = new Ability("Fireball", 5, activeAbilities.Count + 1);
+        Ability fireBall = new Ability("IceShot", 2, activeAbilities.Count + 1);
         activeAbilities.Add(fireBall);
 
         Ability Punch = new Ability("Pcunh", 1, activeAbilities.Count + 1);
@@ -165,9 +172,8 @@ public class Backpack : MonoBehaviour
             clickedAbility.Fire(gameObject);
 
             StartCoroutine(clickedAbility.StartCoolDown());
-            clickedAbility = null;
         }
-
+        clickedAbility = null;
 
     }
 }

@@ -9,7 +9,8 @@ public class DeathRestart : MonoBehaviour
 
     private void Awake()
     {
-        deathUI.SetActive(true);    
+        deathUI.SetActive(true);
+        GameObject.Find("HP Bar").SetActive(false);
     }
 
     public void RestartScene()

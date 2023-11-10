@@ -22,7 +22,8 @@ public class PlayerCombat : MonoBehaviour
     [Range(0, 10)] public int minAttackDMG;
     [Range(10, 20)] public int maxAttackDMG;
 
-    private Vector2 lastDir;
+
+    public Vector2 lastDir;
 
     private float originalSpeed;
     private float nextAttackTime = 0f;

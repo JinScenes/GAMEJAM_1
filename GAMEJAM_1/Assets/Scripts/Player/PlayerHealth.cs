@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
         hpSlider = GameObject.Find("HP Bar").GetComponent<Slider>();
