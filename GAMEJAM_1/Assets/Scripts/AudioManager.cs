@@ -1,14 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource audioSource;
 
-    [SerializeField] private AudioClip[] musicClips;
-    [SerializeField] private AudioClip[] sfxClips;
+    [SerializeField] private List<AudioClip> musicClips;
+    [SerializeField] private List<AudioClip> sfxClips;
+
+    private Dictionary<string, AudioClip> musicDictionary;
+    private Dictionary<string, AudioClip> sfxDictionary;
 
     private void Awake()
     {
@@ -16,6 +19,7 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            InitializeAudioDictionaries();
         }
         else
         {
@@ -23,38 +27,49 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(int index)
+    private void InitializeAudioDictionaries()
     {
-        if (index >= 0 && index < musicClips.Length)
+        musicDictionary = new Dictionary<string, AudioClip>();
+        sfxDictionary = new Dictionary<string, AudioClip>();
+
+        foreach (var clip in musicClips)
         {
-            musicSource.clip = musicClips[index];
-            musicSource.Play();
+            musicDictionary[clip.name] = clip;
+        }
+
+        foreach (var clip in sfxClips)
+        {
+            sfxDictionary[clip.name] = clip;
+        }
+    }
+
+    public void PlayMusic(string name)
+    {
+        if (musicDictionary.TryGetValue(name, out var clip))
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
         }
         else
         {
-            Debug.LogWarning("No music clip found at the given index!");
+            Debug.LogWarning($"No music clip found with the name: {name}");
         }
     }
 
-    public void PlaySFX(int index)
+    public void PlaySFX(string name)
     {
-        if (index >= 0 && index < sfxClips.Length)
+        if (sfxDictionary.TryGetValue(name, out var clip))
         {
-            sfxSource.PlayOneShot(sfxClips[index]);
+            audioSource.PlayOneShot(clip);
         }
         else
         {
-            Debug.LogWarning("No SFX clip found at the given index!");
+            Debug.LogWarning($"No SFX clip found with the name: {name}");
         }
     }
 
-    public void SetMusicVolume(float volume)
+    public void SetVolume(float volume)
     {
-        musicSource.volume = volume;
-    }
-
-    public void SetSFXVolume(float volume)
-    {
-        sfxSource.volume = volume;
+        audioSource.volume = volume;
     }
 }

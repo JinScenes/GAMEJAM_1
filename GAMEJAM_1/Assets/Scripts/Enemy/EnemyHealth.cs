@@ -26,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
         if (isDead) return;
 
         currentHealth -= damage;
+        AudioManager.Instance.PlaySFX("Enemy Hurt");
         anim.SetTrigger("IsHurt");
         StartCoroutine(FlashColor(0.2f));
 

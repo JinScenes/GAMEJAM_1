@@ -49,6 +49,7 @@ public class PlayerControler : MonoBehaviour
             if (sinceLastStep > timeBetweenStep)
             {
                 sinceLastStep = 0f;
+                AudioManager.Instance.PlaySFX("Footsteps");
             }
         }
         else

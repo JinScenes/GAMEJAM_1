@@ -67,7 +67,7 @@ public class PlayerCombat : MonoBehaviour
     private void AttackFunction()
     {
         anim.SetTrigger("Attacking");
-
+        AudioManager.Instance.PlaySFX("Player Attack");
         Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, attackBoxSize, 0, enemyMask);
         foreach (Collider2D enemy in hitEnemies)
         {

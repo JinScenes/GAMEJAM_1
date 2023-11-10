@@ -59,7 +59,7 @@ public class DamageEnemy : MonoBehaviour
         
         MoveProjectile(Time.deltaTime);
 
-        Collider2D hitEnemy = Physics2D.OverlapCircle(transform.position, 5f, enemyLayer);
+        Collider2D hitEnemy = Physics2D.OverlapCircle(transform.position, 2f, enemyLayer);
         if (hitEnemy && hitEnemy.tag != "Player" && !enemiesHit.Contains(hitEnemy.gameObject))
         {
             enemiesHit.Add(hitEnemy.gameObject);
@@ -74,7 +74,13 @@ public class DamageEnemy : MonoBehaviour
         }
     }
 
- 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 2f);
+    }
+
+
 
     private void MoveProjectile(float delta)
     {
