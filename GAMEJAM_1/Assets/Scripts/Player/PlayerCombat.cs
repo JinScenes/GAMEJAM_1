@@ -59,7 +59,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void UpdateAttackPointPosition()
     {
-        float attackPointDistance = 3f;
+        float attackPointDistance = 1.9f;
         Vector3 offset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
         attackPoint.position = transform.position + offset;
     }

@@ -225,12 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d0990533a1f204b83977e3a4d017d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream:GAMEJAM_1/Assets/Prefabs/Enemies/Enemy.prefab
   maxHealth: 20
   currentHealth: 20
-=======
-  maxHealth: 30
-  currentHealth: 50
->>>>>>> Stashed changes:GAMEJAM_1/Assets/Prefabs/Enemy.prefab
   droppedItem: {fileID: 897463791585460698, guid: b8c8aef6d242f324693ed4bb98c2547a, type: 3}
   isDead: 0

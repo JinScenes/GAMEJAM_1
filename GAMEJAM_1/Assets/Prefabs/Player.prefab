@@ -216,11 +216,12 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 128
-  attackBoxSize: {x: 4.2, y: 4.64}
+  attackBoxSize: {x: 4.2, y: 5.52}
   attackSpeed: 2.31
   attackPointDistance: 6
   minAttackDMG: 10
   maxAttackDMG: 10
+  lastDir: {x: 0, y: 0}
 --- !u!114 &412141704329023724
 MonoBehaviour:
   m_ObjectHideFlags: 0

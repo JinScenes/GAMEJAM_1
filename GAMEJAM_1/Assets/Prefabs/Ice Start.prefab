@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8567269426877111643}
   - component: {fileID: 835010156717822720}
   - component: {fileID: 7010124337049884230}
+  - component: {fileID: -2229091801641670153}
   m_Layer: 8
   m_Name: Ice Start
   m_TagString: Untagged
@@ -106,3 +107,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2229091801641670153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6852792064701007821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2229941fd835c418bedc0d6436c2f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 0.5
