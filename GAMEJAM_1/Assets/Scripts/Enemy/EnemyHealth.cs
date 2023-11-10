@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -8,8 +7,8 @@ public class EnemyHealth : MonoBehaviour
     private SpriteRenderer sp;
 
     [Header("Health Stats")]
-    [Range(0, 100)][SerializeField] private int maxHealth;
-    [Range(0, 50)][SerializeField] private int currentHealth;
+    [Range(0, 100)] [SerializeField] private int maxHealth;
+    [Range(0, 50)] [SerializeField] private int currentHealth;
 
     [SerializeField] private GameObject droppedItem;
 
@@ -24,16 +23,19 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
-        anim.SetTrigger("Hurt");
+        anim.SetTrigger("IsHurt");
         StartCoroutine(FlashColor(0.2f));
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
+            isDead = true;
             DeathFunction(1f);
-            this.enabled = false;
         }
     }
+
 
     private IEnumerator FlashColor(float duration)
     {

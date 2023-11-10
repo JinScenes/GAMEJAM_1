@@ -12,8 +12,8 @@ public class PlayerCombat : MonoBehaviour
     [Header("Enemy Mask")]
     [SerializeField] private LayerMask enemyMask;
 
-    [Header("Attack Rate & Range Stats")]
-    [Range(0, 2)][SerializeField] private float attackRange;
+    [Header("Attack Box Dimensions")]
+    [SerializeField] private Vector2 attackBoxSize;
     [Range(0, 5)][SerializeField] private float attackSpeed;
 
     [SerializeField] float attackPointDistance;
@@ -58,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void UpdateAttackPointPosition()
     {
-        float attackPointDistance = 1.5f;
+        float attackPointDistance = 3f;
         Vector3 offset = new Vector3(lastDir.x, lastDir.y, 0) * attackPointDistance;
         attackPoint.position = transform.position + offset;
     }
@@ -67,11 +67,11 @@ public class PlayerCombat : MonoBehaviour
     {
         anim.SetTrigger("Attacking");
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyMask);
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, attackBoxSize, 0, enemyMask);
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHealth>().TakeDamage(Random.Range(minAttackDMG, maxAttackDMG));
-            Debug.Log((Random.Range(minAttackDMG, maxAttackDMG)));
+            //Debug.Log((Random.Range(minAttackDMG, maxAttackDMG)));
         }
     }
 
@@ -82,23 +82,13 @@ public class PlayerCombat : MonoBehaviour
         playerController.speed = originalSpeed;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (attackPoint == null)
-            return;
-
-        Gizmos.color = Color.blue;
-        Vector3 gizmoPosition = transform.position + new Vector3(lastDir.x, lastDir.y, 0) * attackRange;
-        Gizmos.DrawWireSphere(gizmoPosition, attackRange);
-    }
-
-
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
             return;
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.color = Color.red;
+        // Draw a cube in the scene view for the attack box
+        Gizmos.DrawWireCube(attackPoint.position, new Vector3(attackBoxSize.x, attackBoxSize.y, 1));
     }
 }

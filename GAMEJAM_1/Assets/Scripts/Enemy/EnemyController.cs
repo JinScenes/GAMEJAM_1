@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour
     {
         if (GetComponent<EnemyHealth>().isDead)
         {
+            HandleDeath();
             return;
         }
 
@@ -54,6 +55,19 @@ public class EnemyController : MonoBehaviour
             movement = Vector2.zero;
             anim.SetBool("Walk", false);
         }
+    }
+
+    private void HandleDeath()
+    {
+        speed = 0;
+        rb.velocity = Vector2.zero;
+        anim.SetBool("Attacking", false);
+        anim.SetBool("Moving", false);
+
+        rb.isKinematic = true;
+        rb.simulated = false;
+
+        anim.SetTrigger("Die");
     }
 
     private void FixedUpdate()
